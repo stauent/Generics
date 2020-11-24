@@ -61,6 +61,12 @@ namespace Generics
         }
     }
 
+
+    /// <summary>
+    /// Generic interface used by all DoubleLinkedList
+    /// </summary>
+    /// <typeparam name="TKey">Key type</typeparam>
+    /// <typeparam name="TValue">Value type</typeparam>
     public interface IDoubleLinkedList<TKey, TValue>
     {
         IDataNode<TKey, TValue> AppendNode(TKey Key, TValue Value);
