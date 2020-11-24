@@ -8,7 +8,6 @@ namespace Generics
     {
         static void Main(string[] args)
         {
-
             // Make a fixed size array of string data.
             string[] dumbArray = { "First", "Second", "Third" };
             DisplayData(dumbArray);
@@ -200,6 +199,10 @@ namespace Generics
 
             Console.WriteLine($"Last node in stringList {stringList.TerminalNode.Key}={stringList.TerminalNode.Value}");
 
+
+            Car factoryCar = ObjectFactory.Create<Car>();
+            Dog factoryDog = ObjectFactory.Create<Dog>();
+            Cat factoryCat = ObjectFactory.Create<Cat>();
 
 
 
