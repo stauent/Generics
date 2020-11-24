@@ -4,6 +4,11 @@ using System.Text;
 
 namespace Generics
 {
+    /// <summary>
+    /// Generic interface used by all DataNodes
+    /// </summary>
+    /// <typeparam name="TKey">Key type</typeparam>
+    /// <typeparam name="TValue">Value type</typeparam>
     public interface IDataNode<TKey, TValue>
     {
         TKey Key { get; set; }
