@@ -155,44 +155,50 @@ namespace Generics
 
 
             DoubleLinkedList<string, int> intList = new DoubleLinkedList<string, int>();
-            intList.AppendNode("One", 1);
-            intList.AppendNode("Two", 2);
-            intList.AppendNode("Three", 3);
-            intList.AppendNode("Four", 4);
-            intList.AppendNode("Five", 5);
-            intList.AppendNode("Six", 6);
+            intList.Append("One", 1);
+            intList.Append("Two", 2);
+            intList.Append("Three", 3);
+            intList.Append("Four", 4);
+            intList.Append("Five", 5);
+            intList.Append("Six", 6);
             intList.Remove("Four");
             intList.InsertAfter("Three", "Four", 4);
-            intList.AppendNode("Seven", 7);
-            intList.AppendNode("Eight", 8);
+            intList.Append("Seven", 7);
+            intList.Append("Eight", 8);
             intList.Remove("One");
             intList.Remove("Eight");
             intList.InsertAfter("Seven", "Last", 999);
 
             Console.WriteLine($"{intList}");
-            Console.WriteLine($"Value at Six={intList.Find("Six").Value}");
+            Console.WriteLine($"Value at Six={intList["Six"].Value}");
 
 
             DoubleLinkedList<int, double> doubleList = new DoubleLinkedList<int, double>();
-            doubleList.AppendNode(1, 1.12);
-            doubleList.AppendNode(2, 87.4);
-            doubleList.AppendNode(3, 92.6);
-            doubleList.AppendNode(4, 15.4);
-            doubleList.AppendNode(5, 12.66);
-            doubleList.AppendNode(6, 9.3);
-            doubleList.AppendNode(7, 2.3);
+            doubleList.Append(1, 1.12);
+            doubleList.Append(2, 87.4);
+            doubleList.Append(3, 92.6);
+            doubleList.Append(4, 15.4);
+            doubleList.Append(5, 12.66);
+            doubleList.Append(6, 9.3);
+            doubleList.Append(7, 2.3);
             doubleList.Remove(4);
             doubleList.Remove(3);
             doubleList.InsertAfter(2, 3, 99.99);
 
             Console.WriteLine($"{doubleList}");
-            Console.WriteLine($"Value at 6={doubleList.Find(6).Value}");
+            Console.WriteLine($"Value at 6={doubleList[6].Value}");
+
+            //Console.WriteLine("Enumerating entire list ==============================");
+            //foreach (IDataNode<int,double> node in doubleList)
+            //{
+            //    Console.WriteLine($"{node.Key}={node.Value}");
+            //}
 
 
             DoubleLinkedList<int, string> stringList = new DoubleLinkedList<int, string>();
-            stringList.AppendNode(1, "Hello");
-            stringList.AppendNode(2, "There");
-            stringList.AppendNode(3, "Everyone");
+            stringList.Append(1, "Hello");
+            stringList.Append(2, "There");
+            stringList.Append(3, "Everyone");
             stringList.Remove(3);
             stringList.InsertAfter(2, 3, "Bob");
             Console.WriteLine($"{stringList}");
