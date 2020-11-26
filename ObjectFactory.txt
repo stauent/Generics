@@ -1,0 +1,99 @@
+What John said in the last class is very very true.
+You won't learn how to code by watching me code.
+You have to put the time in. Repetition is how you learn.
+Can you learn how to play guitar by listening to a song?
+No, you have to spend hours and hours practicing before you're any good at it.
+
+So today, after a little more discussion and clarification about generics
+I'm going to have you do a little assignment. You're going to use the code
+that you downloaded from GitHub and extend it's functionality. Starting
+to code something from scratch can be frustrating if you don't know where 
+to start. So, starting with some working code and extending/modifying it
+is a good way to learn little things, until you become comfortable with the concepts
+being taught.
+
+To that end, I want to discuss the ObjectFactory in the generics solution (InitializableObjects.cs).
+The code implments the factory design pattern. We have lecture on design patterns 
+later in the course so I don't want to go into too much detail. But, because I think the 
+code in the ObjectFactory class does a real good job of showing you the power of generic
+I'm going to give you a quick overview of the factory pattern. So its kind of killing 
+2 birds with one stone. You'll get a quick introduction to design patterns and 
+explain how generics work with one example.
+
+A pattern is just something that is repeatable. When a sequence of events happens
+the same way over and over and over again, humans see that as a pattern. 
+Take a auto assembly plant for example. First, a chassis is placed on a converyor belt.
+It moves down the line where sombody installs the axels. It moves further down the line
+where somebody installs the transmission. As it keeps moving down the line
+the wheels, seats, doors, windows and engine are installed, until the car is fully assembled.
+This is a complex, repetitive and time consuming process. So it's nice that there's
+a factory that knows how to repeat that processs (pattern) and create cars.
+If every time you needed a new car YOU had to read all the manuals and assemble the 
+car part by part, it would take a very long time and you'd probably get it wrong.
+It's much nicer to simply call the factory and say: "Hey, make me a car"!
+
+This is exactly what the factory design pattern is. It's a reusable solution to a common problem.
+I've created the ObjectFactory class that implements this pattern. Instead of creating 
+cars, it creates any object that implements the ICommunicate interface. In the Animals.cs
+file is the definition of the ICommunicate interface along with several classes that
+implement that interface. The base class "Animal" implements the interface and 
+the Cat and Dog class derive from Animal. 
+
+Although we can "new" up a Cat and a Dog, there are several properties that each
+of these objects need in order to be properly initialized and that information
+is not available at the time of construction. The constructor only supplies the name
+of the animal. All the rest of the information comes from somewhre else. Just like there are many steps
+required to build a car, there can be many complex steps required to initialize any object.
+
+So, to create a "Cat", we don't code all the steps needed to initialize the "Cat" ourselves
+because this is "too complex and time consuming for us to do". Instead, 
+we ask the factory to do ALL the work for us. When ObjectFactory.Create<Cat>("Fluffy")
+is called, the type T tells the factory the type of object we want to create.
+In this case it's a "Cat". The factory creates the cat using the code:
+	 "T newObject = new T()".
+
+The constraints tell the factory the following information:
+	class, ICommunicate, new()
+
+
+1) class        -> means that the object being created is a reference type
+2) ICommunicate -> means that the object being created MUST implement the ICommunicate interface
+3) new()        -> means that the object being created MUST have a no parameter constructor 
+		   so that a call to "new T()" will work.
+
+Once the factory creates the object, it knows that it can call ANY method from the ICommunicate
+interface on that object. So, we call:
+
+            T newObject = new T();
+            newObject.Initialize(Name);
+
+The initialize method takes 1 parameter, which is the name of the animal being created. 
+The rest of the initialization information and process required to properly initialize
+the object is performed in the "Initialize" method. 
+
+We simulate the complex initialization process by retreiving the required initialization
+data from a dummy in-memory database. We simply look up the required intialization
+info based on the name of the object type being created. So when we create a "cat"
+we ask the database for "cat" related information. When we create a "dog" 
+we ask the database for "dog" related information. 
+
+Once the object has been fully initialized, the completed object is returned to the caller.
+This is equivalent to calling the auto factory and asking them to build you a car.
+With the completed object in hand, we can now use it any way we like. We know that
+the ICommunicate interface contains the "Speak" method. So we ask the factory
+to create a Dog and a Cat and then we ask them both to "Speak".
+
+            ICommunicate[] LetsTalk = new ICommunicate[2];
+            LetsTalk[0] = ObjectFactory.Create<Dog>("Rex");
+            LetsTalk[1] = ObjectFactory.Create<Cat>("Fluffy");
+
+            foreach(ICommunicate speaker in LetsTalk)
+            {
+                speaker.Speak();
+            }
+
+Here's the output when the animals speak:
+ 
+
+	Rex says Woof, I can live to be 25
+	Fluffy says Meaow, I can live to be 20
