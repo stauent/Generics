@@ -188,11 +188,11 @@ namespace Generics
             Console.WriteLine($"{doubleList}");
             Console.WriteLine($"Value at 6={doubleList[6].Value}");
 
-            Console.WriteLine("Enumerating entire list ==============================");
-            foreach (IDataNode<int,double> node in doubleList)
-            {
-                Console.WriteLine($"{node.Key}={node.Value}");
-            }
+            //Console.WriteLine("Enumerating entire list ==============================");
+            //foreach (IDataNode<int,double> node in doubleList)
+            //{
+            //    Console.WriteLine($"{node.Key}={node.Value}");
+            //}
 
 
             DoubleLinkedList<int, string> stringList = new DoubleLinkedList<int, string>();
