@@ -188,11 +188,11 @@ namespace Generics
             Console.WriteLine($"{doubleList}");
             Console.WriteLine($"Value at 6={doubleList[6].Value}");
 
-            //Console.WriteLine("Enumerating entire list ==============================");
-            //foreach (IDataNode<int,double> node in doubleList)
-            //{
-            //    Console.WriteLine($"{node.Key}={node.Value}");
-            //}
+            Console.WriteLine("Enumerating entire list ==============================");
+            foreach (IDataNode<int,double> node in doubleList)
+            {
+                Console.WriteLine($"{node.Key}={node.Value}");
+            }
 
 
             DoubleLinkedList<int, string> stringList = new DoubleLinkedList<int, string>();
@@ -207,12 +207,10 @@ namespace Generics
 
             Console.WriteLine("Demonstrate factory pattern using generics===============");
 
-            ICommunicate factoryDog = ObjectFactory.Create<Dog>("Rex");
-            ICommunicate factoryCat = ObjectFactory.Create<Cat>("Fluffy");
+            ICommunicate[] LetsTalk = new ICommunicate[2];
+            LetsTalk[0] = ObjectFactory.Create<Dog>("Rex");
+            LetsTalk[1] = ObjectFactory.Create<Cat>("Fluffy");
 
-            List<ICommunicate> LetsTalk = new List<ICommunicate>();
-            LetsTalk.Add(factoryDog);
-            LetsTalk.Add(factoryCat);
             foreach(ICommunicate speaker in LetsTalk)
             {
                 speaker.Speak();

@@ -78,7 +78,7 @@ namespace Generics
         string ToString();
     }
 
-    public class DoubleLinkedList<TKey, TValue> : IDoubleLinkedList<TKey, TValue>
+    public class DoubleLinkedList<TKey, TValue> : IDoubleLinkedList<TKey, TValue>, IEnumerable<IDataNode<TKey, TValue>>
     {
 
         /// <summary>
@@ -265,6 +265,29 @@ namespace Generics
                 Found = Found.NextNode;
             }
             return (sb.ToString());
+        }
+
+        /// <summary>
+        /// This is how a enumerator for a generic type is constructed
+        /// </summary>
+        /// <returns>An strongly typed IDataNode is returned on each iteration</returns>
+        public virtual IEnumerator<IDataNode<TKey, TValue>> GetEnumerator()
+        {
+            IDataNode<TKey, TValue> Found = RootNode;
+            while (Found != null)
+            {
+                yield return Found;
+                Found = Found.NextNode;
+            }
+        }
+
+        /// <summary>
+        /// For compatability with .Net 1.1 and earlier
+        /// </summary>
+        /// <returns>Return type is plain Object, not IDataNode</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
     }
