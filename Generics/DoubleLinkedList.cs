@@ -98,7 +98,7 @@ namespace Generics
         /// <param name="Key">Unique key used to look up the associated value</param>
         /// <param name="Value">The value to be placed in the appended node</param>
         /// <returns>IDataNode reference to the newly appended node</returns>
-        public IDataNode<TKey, TValue> Append(TKey Key, TValue Value)
+        public virtual IDataNode<TKey, TValue> Append(TKey Key, TValue Value)
         {
             IDataNode<TKey, TValue> Existing = this[Key];
             if (Existing != null)
@@ -125,7 +125,7 @@ namespace Generics
         /// <param name="Key">Unique key used to look up the associated value</param>
         /// <param name="Value">The value to be placed in the appended node</param>
         /// <returns>IDataNode reference to the newly appended node</returns>
-        public IDataNode<TKey, TValue> CreateNode(TKey Key, TValue Value)
+        public virtual IDataNode<TKey, TValue> CreateNode(TKey Key, TValue Value)
         {
             IDataNode<TKey, TValue> NewNode = new DataNode<TKey, TValue>(Key, Value);
             return (NewNode);
@@ -136,7 +136,7 @@ namespace Generics
         /// </summary>
         /// <param name="Key">Lookup key to find value in the list</param>
         /// <returns>IDataNode reference to matching node if found. Null otherwise</returns>
-        public IDataNode<TKey, TValue> this[TKey Key]
+        public virtual IDataNode<TKey, TValue> this[TKey Key]
         {
             get
             {
@@ -184,7 +184,7 @@ namespace Generics
         /// Removes the node matching the specified key from the list
         /// </summary>
         /// <param name="Key">Key of the node you want to remove</param>
-        public void Remove(TKey Key)
+        public virtual void Remove(TKey Key)
         {
             IDataNode<TKey, TValue> Found = this[Key];
             if (Found != null)
@@ -209,7 +209,7 @@ namespace Generics
         /// <param name="InsertKey">Key of new node being inserted</param>
         /// <param name="InsertValue">Value of new node being inserted</param>
         /// <returns>IDataNode of the new node that was inserted</returns>
-        public IDataNode<TKey, TValue> InsertAfter(TKey KeyAfter, TKey InsertKey, TValue InsertValue)
+        public virtual IDataNode<TKey, TValue> InsertAfter(TKey KeyAfter, TKey InsertKey, TValue InsertValue)
         {
             IDataNode<TKey, TValue> Existing = this[InsertKey];
             if (Existing != null)
@@ -233,7 +233,7 @@ namespace Generics
         /// <param name="InsertKey">Key of new node being inserted</param>
         /// <param name="InsertValue">Value of new node being inserted</param>
         /// <returns>IDataNode of the new node that was inserted</returns>
-        public IDataNode<TKey, TValue> InsertBefore(TKey KeyBefore, TKey InsertKey, TValue InsertValue)
+        public virtual IDataNode<TKey, TValue> InsertBefore(TKey KeyBefore, TKey InsertKey, TValue InsertValue)
         {
             IDataNode<TKey, TValue> Existing = this[InsertKey];
             if (Existing != null)
@@ -266,7 +266,6 @@ namespace Generics
             }
             return (sb.ToString());
         }
-
 
     }
 }

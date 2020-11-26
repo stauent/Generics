@@ -202,13 +202,21 @@ namespace Generics
             stringList.Remove(3);
             stringList.InsertAfter(2, 3, "Bob");
             Console.WriteLine($"{stringList}");
+            Console.WriteLine($"Last node in stringList {stringList.TerminalNode.Key}={stringList.TerminalNode.Value}\r\n\r\n");
 
-            Console.WriteLine($"Last node in stringList {stringList.TerminalNode.Key}={stringList.TerminalNode.Value}");
 
+            Console.WriteLine("Demonstrate factory pattern using generics===============");
 
-            Car factoryCar = ObjectFactory.Create<Car>();
-            Dog factoryDog = ObjectFactory.Create<Dog>();
-            Cat factoryCat = ObjectFactory.Create<Cat>();
+            ICommunicate factoryDog = ObjectFactory.Create<Dog>("Rex");
+            ICommunicate factoryCat = ObjectFactory.Create<Cat>("Fluffy");
+
+            List<ICommunicate> LetsTalk = new List<ICommunicate>();
+            LetsTalk.Add(factoryDog);
+            LetsTalk.Add(factoryCat);
+            foreach(ICommunicate speaker in LetsTalk)
+            {
+                speaker.Speak();
+            }
 
 
 
